@@ -21,21 +21,11 @@ namespace UI
 		public OnChangeMenu OnBack = null;
 		public OnChangeMenu OnShow = null;
 		private Stack<MainUIType> MainUIStack = new Stack<MainUIType> ();
-		private static MainUIController instance;
+		public static MainUIController Instance;
 		
-		public static MainUIController Instance {
-			get { 
-				if (instance == null) {
-					instance = FindObjectOfType<MainUIController> ();
-					Debug.LogError ("*****instance=" + instance + "*****");
-				}
-				return instance;
-			}
-		}
-
 		void Awake ()
 		{
-			instance = this;
+			Instance = this;
 		}
 
 		public void Show (TipType _type)

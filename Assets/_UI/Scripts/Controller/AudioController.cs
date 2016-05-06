@@ -18,6 +18,7 @@ namespace UI {
 		/// 普通按钮点击音效
 		/// </summary>
 		Audio_BtnClick,
+
 	}
 
 	public enum AudioState {

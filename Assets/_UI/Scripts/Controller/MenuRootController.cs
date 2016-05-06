@@ -1,19 +1,26 @@
 ﻿
 using UnityEngine;
 using System.Collections.Generic;
+using Update;
 
 namespace UI {
 	public enum MenuType {
 		None = 0,
+		Game1 = 1,
+		Game2 = 2,
+		Game3 = 3,
 		Main,
-		Game1,
+		SelectLevel,
 	}
 
 	public enum MenuName {
 		None = 0,
+		GameBoard1 = 1,
+		GameBoard2 = 2,
+		GameBoard3 = 3,
 		MainMenuBoard,
-		Game1Board,
 		CoinBoard,
+		SelectLevelBoard,
 	}
 
 	[System.Serializable]

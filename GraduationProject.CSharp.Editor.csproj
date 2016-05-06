@@ -98,6 +98,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Illogika\Editor\HideConditionalDrawer.cs" />
+    <Compile Include="Assets\Illogika\Editor\IllogikaDrawer.cs" />
+    <Compile Include="Assets\Illogika\Editor\NMBColorAttribute.cs" />
+    <Compile Include="Assets\Illogika\Editor\NMBColorDrawer.cs" />
+    <Compile Include="Assets\Illogika\Editor\NMBNameAttribute.cs" />
+    <Compile Include="Assets\Illogika\Editor\NMBNameDrawer.cs" />
+    <Compile Include="Assets\Illogika\Editor\NamedMonoBehaviour.cs" />
     <Compile Include="Assets\_UI\Scripts\Editor\AtlasTools.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

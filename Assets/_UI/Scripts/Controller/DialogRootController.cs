@@ -8,10 +8,16 @@ using Update;
 namespace UI {
 	public enum DialogType {
 		None = 0,
+		Shadow,
+		GamePause,
+		GameOver,
 	}
 
 	public enum DialogName {
 		None = 0,
+		ShadowDialog,
+		GamePauseDialog,
+		GameOverDialog,
 	}
 
 	[System.Serializable]
@@ -22,7 +28,6 @@ namespace UI {
 
 	public class DialogRootController : MonoBehaviour {
 		public static DialogRootController instance;
-		public RectTransform thisPos;
 		public DialogContainer[] Dialogs;
 		private List<GameObject> canvasList = new List<GameObject>();
 		private Dictionary<DialogName, GameObject> DialogGO = new Dictionary<DialogName, GameObject>();

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 3af72f7f9002f5d4091cb8f6ab969a35
-timeCreated: 1460642073
+timeCreated: 1462533825
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
@@ -26,7 +26,7 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: 4
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteSheet:
     sprites: []
     outline: []
-  spritePackingTag: 
+  spritePackingTag: Atlas_Menu
   userData: 
   assetBundleName: 
   assetBundleVariant: 

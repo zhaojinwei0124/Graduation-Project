@@ -62,11 +62,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Illogika\HideConditionalAttribute.cs" />
     <Compile Include="Assets\_Client\Scripts\Client.cs" />
     <Compile Include="Assets\_Client\Scripts\ModGame.cs" />
     <Compile Include="Assets\_Client\Scripts\ModPlayer.cs" />
-    <Compile Include="Assets\_Game\Scripts\NewBehaviourScript.cs" />
+    <Compile Include="Assets\_Game\Scripts\AutoDestroy.cs" />
+    <Compile Include="Assets\_Game\Scripts\AutoMove.cs" />
+    <Compile Include="Assets\_Game\Scripts\GamePlayer1.cs" />
+    <Compile Include="Assets\_Game\Scripts\GamePlayer2.cs" />
+    <Compile Include="Assets\_Game\Scripts\ItemSpawn1.cs" />
+    <Compile Include="Assets\_Game\Scripts\ItemSpawn2.cs" />
     <Compile Include="Assets\_UI\Scripts\Common\CommonUtil.cs" />
+    <Compile Include="Assets\_UI\Scripts\Controller\AtlasManager.cs" />
+    <Compile Include="Assets\_UI\Scripts\Controller\AudioButton.cs" />
     <Compile Include="Assets\_UI\Scripts\Controller\AudioController.cs" />
     <Compile Include="Assets\_UI\Scripts\Controller\DialogRootController.cs" />
     <Compile Include="Assets\_UI\Scripts\Controller\LoadRootController.cs" />
@@ -79,14 +87,20 @@
     <Compile Include="Assets\_UI\Scripts\Data\PreloadData.cs" />
     <Compile Include="Assets\_UI\Scripts\Data\UIData.cs" />
     <Compile Include="Assets\_UI\Scripts\Data\UIInfo.cs" />
-    <Compile Include="Assets\_UI\Scripts\GameScene1\AutoDestroy.cs" />
-    <Compile Include="Assets\_UI\Scripts\GameScene1\AutoMove.cs" />
-    <Compile Include="Assets\_UI\Scripts\GameScene1\ButtonGame1PlayeControler.cs" />
-    <Compile Include="Assets\_UI\Scripts\GameScene1\Game1Board.cs" />
-    <Compile Include="Assets\_UI\Scripts\GameScene1\Game1Player.cs" />
-    <Compile Include="Assets\_UI\Scripts\GameScene1\ItemSpawn.cs" />
-    <Compile Include="Assets\_UI\Scripts\GameScene1\Lines.cs" />
+    <Compile Include="Assets\_UI\Scripts\Game1\BtnGame2PlayerContraller.cs" />
+    <Compile Include="Assets\_UI\Scripts\Game1\ButtonGame1PlayeControler.cs" />
+    <Compile Include="Assets\_UI\Scripts\Game1\GameBoard1.cs" />
+    <Compile Include="Assets\_UI\Scripts\Game1\GameBoard2.cs" />
+    <Compile Include="Assets\_UI\Scripts\Game1\Lines.cs" />
     <Compile Include="Assets\_UI\Scripts\Manager\UIPreLoadManager.cs" />
+    <Compile Include="Assets\_UI\Scripts\Menu\BtnContinue.cs" />
+    <Compile Include="Assets\_UI\Scripts\Menu\BtnPause.cs" />
+    <Compile Include="Assets\_UI\Scripts\Menu\BtnRestart.cs" />
+    <Compile Include="Assets\_UI\Scripts\Menu\CommonBackButton.cs" />
+    <Compile Include="Assets\_UI\Scripts\Menu\CommonUIButton.cs" />
+    <Compile Include="Assets\_UI\Scripts\Menu\GameOverDialog.cs" />
+    <Compile Include="Assets\_UI\Scripts\Menu\LevelGrid.cs" />
+    <Compile Include="Assets\_UI\Scripts\Menu\MainMenuBoard.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
