@@ -59,8 +59,7 @@ namespace UI {
 			Score.text = score.ToString();
 		}
 
-		void Start()
-		{
+		void Start() {
 			Time.timeScale = 1;
 			Client.instance.Player.GameScore1 = 0;
 			CleanAllItems();
@@ -70,8 +69,7 @@ namespace UI {
 			ItemSpawn1.Start();
 		}
 
-		void OnEnable()
-		{
+		void OnEnable() {
 			Start();
 		}
 
@@ -89,7 +87,9 @@ namespace UI {
 
 		public void CleanAllItems() {
 			for (int i = 0; i < ItemSpawn1.transform.childCount; i++) {
-				Destroy(ItemSpawn1.transform.GetChild(i).gameObject);
+				if (ItemSpawn1.transform.childCount > 0) {
+					Destroy(ItemSpawn1.transform.GetChild(i).gameObject);
+				}
 			}
 		}
 

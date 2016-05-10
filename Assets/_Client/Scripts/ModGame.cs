@@ -21,5 +21,8 @@ public class ModGame : MonoBehaviour {
 		/// </summary>
 		GameOver
 	}
-
+	/// <summary>
+	/// 第二关敌人数量
+	/// </summary>
+	public int ItemCount;
 }

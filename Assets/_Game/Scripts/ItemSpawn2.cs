@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using client;
 using Common;
 using Update;
 
@@ -21,10 +22,6 @@ public class ItemSpawn2 : MonoBehaviour {
 	/// 物品火
 	/// </summary>
 	private GameObject Fire;
-	/// <summary>
-	/// 场景中存在的物品数目
-	/// </summary>
-	private int ItemCount = 0;
 	public Coroutine Coroutine;
 
 	public void Start() {
@@ -48,7 +45,7 @@ public class ItemSpawn2 : MonoBehaviour {
 
 		while (true) {
 			yield return new WaitForSeconds(TimeInterval);
-			if (ItemCount < 8) {
+			if (Client.instance.Game.ItemCount < 8) {
 				rd = Random.Range(0, 2);
 				if (rd == 0) {
 					Item = Instantiate(Water);
@@ -75,7 +72,7 @@ public class ItemSpawn2 : MonoBehaviour {
 						index = 3;
 						break;
 				}
-				ItemCount += 1;
+				Client.instance.Game.ItemCount += 1;
 				SetItemPosition(Item, Pos, index);
 			}
 		}
