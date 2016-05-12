@@ -10,7 +10,7 @@ namespace Game {
 		/// <summary>
 		/// 生产物品的时间间隔
 		/// </summary>
-		public float TimeInterval = 1;
+		private float TimeInterval = 0.5f;
 
 		/// <summary>
 		/// 物品水
@@ -25,8 +25,7 @@ namespace Game {
 		public Coroutine Coroutine;
 
 		public void Start() {
-			if (Coroutine!= null)
-			{
+			if (Coroutine != null) {
 				StopCoroutine(Coroutine);
 			}
 			Water = UIPreLoadManager.instance.GetGameObjectByName("Water1");
@@ -43,24 +42,20 @@ namespace Game {
 			GameObject ItemRight = null;
 			int rd;
 
-			while (true)
-			{
+			while (true) {
 				yield return new WaitForSeconds(TimeInterval);
 				rd = Random.Range(0, 2);
-				if (rd == 0)
-				{
+				if (rd == 0) {
 					ItemLeft = Instantiate(Water);
-				} else
-				{
+				} else {
 					ItemLeft = Instantiate(Fire);
 				}
 				SetItemPosition(ItemLeft, true);
+				yield return new WaitForSeconds(TimeInterval);
 				rd = Random.Range(0, 2);
-				if (rd == 0)
-				{
+				if (rd == 0) {
 					ItemRight = Instantiate(Water);
-				} else
-				{
+				} else {
 					ItemRight = Instantiate(Fire);
 				}
 				SetItemPosition(ItemRight, false);
@@ -77,22 +72,16 @@ namespace Game {
 			rt.SetParent(transform);
 			rt.localScale = Vector3.one;
 			var rd = Random.Range(0, 2);
-			if (rd == 0)
-			{
-				if (left)
-				{
+			if (rd == 0) {
+				if (left) {
 					rt.localPosition = new Vector2(GamePlayer1.instance.PlayerRoadX[0], 0);
-				} else
-				{
+				} else {
 					rt.localPosition = new Vector2(GamePlayer1.instance.PlayerRoadX[2], 0);
 				}
-			} else
-			{
-				if (left)
-				{
+			} else {
+				if (left) {
 					rt.localPosition = new Vector2(GamePlayer1.instance.PlayerRoadX[1], 0);
-				} else
-				{
+				} else {
 					rt.localPosition = new Vector2(GamePlayer1.instance.PlayerRoadX[3], 0);
 				}
 			}

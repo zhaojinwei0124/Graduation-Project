@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using client;
-using Game;
 using UI;
 
 namespace Game {
-
-
 
 	public class GamePlayer2 : MonoBehaviour {
 		/// <summary>
@@ -26,13 +22,15 @@ namespace Game {
 
 		void Update() {
 			if (PlayerType == Client.instance.Player.CurrentPlayer) {
-				transform.RotateAround(OtherPlayer.position, Vector3.forward, Time.deltaTime * Speed);
+				transform.RotateAround(OtherPlayer.position, 
+					Vector3.forward, 
+					Time.deltaTime * Speed * Client.instance.Player.Fd);
 			}
 		}
 
 		void OnTriggerEnter2D(Collider2D other) {
 			if (other.gameObject.tag == "Line") {
-				Speed *= -1;
+				Client.instance.Player.Fd *= -1;
 			}
 
 			if (other.gameObject.tag == "Water") {
@@ -40,6 +38,7 @@ namespace Game {
 					Client.instance.Player.GameScore2 += 1;
 					GameBoard2.instance.SetScore(Client.instance.Player.GameScore2);
 					Destroy(other.gameObject);
+					Client.instance.Game.ItemCount -= 1;
 				} else {
 					GameBoard2.instance.GameOver();
 				}
@@ -49,6 +48,7 @@ namespace Game {
 					Client.instance.Player.GameScore2 += 1;
 					GameBoard2.instance.SetScore(Client.instance.Player.GameScore2);
 					Destroy(other.gameObject);
+					Client.instance.Game.ItemCount -= 1;
 				} else {
 					GameBoard2.instance.GameOver();
 				}

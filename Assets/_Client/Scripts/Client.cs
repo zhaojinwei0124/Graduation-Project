@@ -3,8 +3,7 @@ using System.Collections;
 
 namespace client {
 
-	public class Client : MonoBehaviour
-	{
+	public class Client : MonoBehaviour {
 
 		public static Client instance;
 		/// <summary>
@@ -27,8 +26,12 @@ namespace client {
 		/// 第二关最高分
 		/// </summary>
 		public const string GAME_2_MAXSCORE = "Game_2_MaxScore";
-		void Awake()
-		{
+		/// <summary>
+		/// 第二关最高分
+		/// </summary>
+		public const string GAME_3_MAXSCORE = "Game_3_MaxScore";
+
+		void Awake() {
 			instance = this;
 		}
 

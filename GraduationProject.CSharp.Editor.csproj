@@ -90,6 +90,33 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="DemiLib">
+      <HintPath>Assets\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>Assets\Demigiant\DOTween\DOTween43.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>Assets\Demigiant\DOTween\DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenProEditor">
+      <HintPath>Assets\Demigiant\DOTweenPro\Editor\DOTweenProEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenPro">
+      <HintPath>Assets\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
+    </Reference>
+    <Reference Include="DemiEditor">
+      <HintPath>Assets\Demigiant\DemiLib\Core\Editor\DemiEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>Assets\Demigiant\DOTween\DOTween46.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="GraduationProject.CSharp.csproj">
@@ -98,6 +125,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Demigiant\DOTweenPro\Editor\DOTweenAnimationInspector.cs" />
     <Compile Include="Assets\Illogika\Editor\HideConditionalDrawer.cs" />
     <Compile Include="Assets\Illogika\Editor\IllogikaDrawer.cs" />
     <Compile Include="Assets\Illogika\Editor\NMBColorAttribute.cs" />
@@ -106,6 +134,20 @@
     <Compile Include="Assets\Illogika\Editor\NMBNameDrawer.cs" />
     <Compile Include="Assets\Illogika\Editor\NamedMonoBehaviour.cs" />
     <Compile Include="Assets\_UI\Scripts\Editor\AtlasTools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
+    <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
+    <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
+    <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
+    <None Include="Assets\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
+    <None Include="Assets\Demigiant\DOTween\readme.txt" />
+    <None Include="Assets\Demigiant\DOTweenPro\DOTweenPro.XML" />
+    <None Include="Assets\Demigiant\DOTweenPro\Editor\DOTweenProEditor.XML" />
+    <None Include="Assets\Demigiant\DOTweenPro\readme.txt" />
+    <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
+    <None Include="Assets\Demigiant\DemiLib\Core\Editor\DemiEditor.xml" />
+    <None Include="Assets\Demigiant\readme_DOTweenPro.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using client;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UI;
@@ -33,34 +35,43 @@ namespace Game {
 		/// 当先路线的编号
 		/// </summary>
 		private int CurrentRoadNum;
-	
+		/// <summary>
+		/// 特效物体
+		/// </summary>
+		public GameObject EffectObject;
+
 		void Awake() {
 			instance = this;
 		}
 
-		void Start() {
-			if (PlayerType == PlayerType.PlayerWater)
-			{
+		public void Start() {
+			StartCoroutine(RestEffect());
+			if (PlayerType == PlayerType.PlayerWater) {
 				CurrentRoadNum = 0;
-			} else
-			{
+			} else {
 				CurrentRoadNum = 3;
 			}
 			BgRect = GameBoard1.instance.Bg.rectTransform;
 			var width = BgRect.rect.width;
-			for (int i = 0; i < PlayerRoadX.Length; i++)
-			{
+			for (int i = 0; i < PlayerRoadX.Length; i++) {
 				PlayerRoadX[i] = width / 8 * (2 * i - 3);
 			}
 			SetPlayerPositon();
+		}
+
+		IEnumerator RestEffect() {
+			EffectObject.SetActive(false);
+			EffectObject.SetActive(false);
+			yield return 0;
+			EffectObject.SetActive(true);
+			EffectObject.SetActive(true);
 		}
 
 		/// <summary>
 		/// 改变玩家所处路线
 		/// </summary>
 		public void ChangeRoadNum() {
-			switch (CurrentRoadNum)
-			{
+			switch (CurrentRoadNum) {
 				case 0:
 					CurrentRoadNum = 1;
 					break;
@@ -85,7 +96,7 @@ namespace Game {
 			var rect = GetComponent<Image>().rectTransform;
 			var y = rect.localPosition.y;
 			var toPosition = new Vector2(PlayerRoadX[index], y);
-			rect.localPosition = Vector3.Lerp(rect.localPosition, toPosition, Time.time);
+			rect.DOLocalMove(toPosition, 0.2f);
 		}
 
 		/// <summary>
@@ -95,37 +106,29 @@ namespace Game {
 		public void SetPlayerPositon() {
 			var rect = GetComponent<Image>().rectTransform;
 			var y = rect.localPosition.y;
-			if (PlayerType == PlayerType.PlayerWater)
-			{
+			if (PlayerType == PlayerType.PlayerWater) {
 				rect.localPosition = new Vector2(PlayerRoadX[0], y);
-			} else if (PlayerType == PlayerType.PlayerFire)
-			{
+			} else if (PlayerType == PlayerType.PlayerFire) {
 				rect.localPosition = new Vector2(PlayerRoadX[3], y);
 			}
 		}
 
 		void OnTriggerEnter2D(Collider2D other) {
-			if (other.gameObject.tag == "Water")
-			{
-				if (PlayerType == PlayerType.PlayerWater)
-				{
+			if (other.gameObject.tag == "Water") {
+				if (PlayerType == PlayerType.PlayerWater) {
 					Client.instance.Player.GameScore1 += 1;
 					GameBoard1.instance.SetScore(Client.instance.Player.GameScore1);
 					Destroy(other.gameObject);
-				} else
-				{
+				} else {
 					GameBoard1.instance.GameOver();
 				}
 			}
-			if (other.gameObject.tag == "Fire")
-			{
-				if (PlayerType == PlayerType.PlayerFire)
-				{
+			if (other.gameObject.tag == "Fire") {
+				if (PlayerType == PlayerType.PlayerFire) {
 					Client.instance.Player.GameScore1 += 1;
 					GameBoard1.instance.SetScore(Client.instance.Player.GameScore1);
 					Destroy(other.gameObject);
-				} else
-				{
+				} else {
 					GameBoard1.instance.GameOver();
 				}
 			}

@@ -61,11 +61,12 @@ namespace UI {
 
 		void Start() {
 			Time.timeScale = 1;
+			Client.instance.Game.CurrntLevel = Level.Level_1;
 			Client.instance.Player.GameScore1 = 0;
 			CleanAllItems();
 			SetScore(0);
-			Water.SetPlayerPositon();
-			Fire.SetPlayerPositon();
+			Water.Start();
+			Fire.Start();
 			ItemSpawn1.Start();
 		}
 
@@ -94,6 +95,9 @@ namespace UI {
 		}
 
 		public void GameOver() {
+			if (MainUIController.Instance.CurrentDialogType == DialogType.GameOver) {
+				return;
+			}
 			Time.timeScale = 0;
 			if (MaxScore < Client.instance.Player.GameScore1) {
 				MaxScore = Client.instance.Player.GameScore1;

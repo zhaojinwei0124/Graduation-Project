@@ -2,8 +2,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
-using Update;
 
 namespace UI {
 	public enum DialogType {
@@ -11,6 +9,9 @@ namespace UI {
 		Shadow,
 		GamePause,
 		GameOver,
+		Setting,
+		Help,
+		Close,
 	}
 
 	public enum DialogName {
@@ -18,6 +19,9 @@ namespace UI {
 		ShadowDialog,
 		GamePauseDialog,
 		GameOverDialog,
+		SettingDialog,
+		HelpDialog,
+		CloseDialog,
 	}
 
 	[System.Serializable]
@@ -37,12 +41,9 @@ namespace UI {
 		}
 
 		public void SetDialogActive(List<DialogType> _types, bool isActive) {
-			for (int d = 0; d < _types.Count; d++)
-			{
-				for (int i = 0; i < Dialogs.Length; i++)
-				{
-					if (Dialogs[i].type == _types[d])
-					{
+			for (int d = 0; d < _types.Count; d++) {
+				for (int i = 0; i < Dialogs.Length; i++) {
+					if (Dialogs[i].type == _types[d]) {
 						this.SetDialogActive(Dialogs[i], isActive, d);
 						break;
 					}
@@ -51,21 +52,17 @@ namespace UI {
 		}
 
 		private void SetDialogActive(DialogContainer dialog, bool isActive, int index = 0) {
-			if (canvasList.Count <= index)
-			{
+			if (canvasList.Count <= index) {
 				GameObject iLayer = LoadDialog("DialogLayer");
 				iLayer.transform.SetSiblingIndex(index);
 				canvasList.Add(iLayer);
 			}
-			for (int i = 0; i < dialog.dialogItems.Length; i++)
-			{
-				if (!DialogGO.ContainsKey(dialog.dialogItems[i]))
-				{
+			for (int i = 0; i < dialog.dialogItems.Length; i++) {
+				if (!DialogGO.ContainsKey(dialog.dialogItems[i])) {
 					DialogGO.Add(dialog.dialogItems[i], LoadDialog(dialog.dialogItems[i].ToString(), canvasList[index].transform));
 				}
 				GameObject go = DialogGO[dialog.dialogItems[i]];
-				if (isActive)
-				{
+				if (isActive) {
 					go.transform.SetParent(canvasList[index].transform);
 					go.transform.SetSiblingIndex(i);
 					go.SetActive(isActive);
@@ -90,8 +87,7 @@ namespace UI {
 		}
 
 		public void ClearDialog() {
-			foreach (GameObject go in DialogGO.Values)
-			{
+			foreach (GameObject go in DialogGO.Values) {
 				Destroy(go.gameObject);
 			}
 			DialogGO.Clear();

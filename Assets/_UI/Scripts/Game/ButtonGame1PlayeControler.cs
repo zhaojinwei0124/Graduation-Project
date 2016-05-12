@@ -12,6 +12,7 @@ namespace UI {
 		public GamePlayer1 Player;
 
 		public void OnPointerClick(PointerEventData eventData) {
+			Debug.Log("Click");
 			Player.ChangeRoadNum();
 		}
 	}

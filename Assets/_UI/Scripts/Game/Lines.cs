@@ -1,27 +1,21 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 namespace UI {
-
 	public class Lines : MonoBehaviour {
-
 		/// <summary>
 		/// 线条数组
 		/// </summary>
 		public Image[] LineArr = new Image[3];
-
 		/// <summary>
 		/// 背景图的RectTransform
 		/// </summary>
 		private RectTransform BgRect;
-
 		void Start() {
 			BgRect = GameBoard1.instance.Bg.rectTransform;
 			var width = BgRect.rect.width;
 			SetLinesPosition(width);
 		}
-
 		/// <summary>
 		/// 设置线条位置
 		/// </summary>

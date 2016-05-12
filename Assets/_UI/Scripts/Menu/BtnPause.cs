@@ -1,23 +1,20 @@
 ﻿using UnityEngine;
-using System.Collections;
+using client;
 using UI;
 using UnityEngine.EventSystems;
 
 public class BtnPause : MonoBehaviour, IPointerClickHandler {
 
-	/// <summary>
-	/// 第几关
-	/// </summary>
-	public LevelType Level;
-
 	public void OnPointerClick(PointerEventData eventData) {
-		switch (Level) {
-			case LevelType.Level_1:
+		switch (Client.instance.Game.CurrntLevel) {
+			case Level.Level_1:
 				GameBoard1.instance.Pause();
 				break;
-			case LevelType.Level_2:
+			case Level.Level_2:
+				GameBoard2.instance.Pause();
 				break;
-			case LevelType.Level_3:
+			case Level.Level_3:
+				GameBoard3.instance.Pause();
 				break;
 		}
 	}

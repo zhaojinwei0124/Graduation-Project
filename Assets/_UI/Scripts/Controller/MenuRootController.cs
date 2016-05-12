@@ -1,7 +1,5 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using Update;
 
 namespace UI {
 	public enum MenuType {
