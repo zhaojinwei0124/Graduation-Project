@@ -12,6 +12,7 @@ namespace UI {
 		Setting,
 		Help,
 		Close,
+		ExitGame
 	}
 
 	public enum DialogName {
@@ -22,6 +23,7 @@ namespace UI {
 		SettingDialog,
 		HelpDialog,
 		CloseDialog,
+		ExitGameDialog,
 	}
 
 	[System.Serializable]

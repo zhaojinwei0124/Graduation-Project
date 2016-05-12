@@ -45,6 +45,7 @@ namespace Game {
 		}
 
 		public void Start() {
+			gameObject.SetActive(true);
 			StartCoroutine(RestEffect());
 			if (PlayerType == PlayerType.PlayerWater) {
 				CurrentRoadNum = 0;
@@ -116,19 +117,27 @@ namespace Game {
 		void OnTriggerEnter2D(Collider2D other) {
 			if (other.gameObject.tag == "Water") {
 				if (PlayerType == PlayerType.PlayerWater) {
+					AudioController.Instance.SetAudio(AudioName.Audio_Eat);
 					Client.instance.Player.GameScore1 += 1;
 					GameBoard1.instance.SetScore(Client.instance.Player.GameScore1);
 					Destroy(other.gameObject);
 				} else {
+					AudioController.Instance.SetAudio(AudioName.Audio_Die);
+					EffectManager.instance.PlayEffect(EffectType.Effect_Dead_Fire, gameObject.transform.localPosition);
+					gameObject.SetActive(false);
 					GameBoard1.instance.GameOver();
 				}
 			}
 			if (other.gameObject.tag == "Fire") {
 				if (PlayerType == PlayerType.PlayerFire) {
+					AudioController.Instance.SetAudio(AudioName.Audio_Eat);
 					Client.instance.Player.GameScore1 += 1;
 					GameBoard1.instance.SetScore(Client.instance.Player.GameScore1);
 					Destroy(other.gameObject);
 				} else {
+					AudioController.Instance.SetAudio(AudioName.Audio_Die);
+					EffectManager.instance.PlayEffect(EffectType.Effect_Dead_Water, gameObject.transform.localPosition);
+					gameObject.SetActive(false);
 					GameBoard1.instance.GameOver();
 				}
 			}

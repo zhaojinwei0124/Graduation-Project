@@ -22,8 +22,8 @@ namespace Game {
 
 		void Update() {
 			if (PlayerType == Client.instance.Player.CurrentPlayer) {
-				transform.RotateAround(OtherPlayer.position, 
-					Vector3.forward, 
+				transform.RotateAround(OtherPlayer.position,
+					Vector3.forward,
 					Time.deltaTime * Speed * Client.instance.Player.Fd);
 			}
 		}
@@ -35,21 +35,29 @@ namespace Game {
 
 			if (other.gameObject.tag == "Water") {
 				if (PlayerType == PlayerType.PlayerWater) {
+					AudioController.Instance.SetAudio(AudioName.Audio_Eat);
 					Client.instance.Player.GameScore2 += 1;
 					GameBoard2.instance.SetScore(Client.instance.Player.GameScore2);
 					Destroy(other.gameObject);
 					Client.instance.Game.ItemCount -= 1;
 				} else {
+					AudioController.Instance.SetAudio(AudioName.Audio_Die);
+					EffectManager.instance.PlayEffect(EffectType.Effect_Dead_Fire, gameObject.transform.localPosition);
+					gameObject.SetActive(false);
 					GameBoard2.instance.GameOver();
 				}
 			}
 			if (other.gameObject.tag == "Fire") {
 				if (PlayerType == PlayerType.PlayerFire) {
+					AudioController.Instance.SetAudio(AudioName.Audio_Eat);
 					Client.instance.Player.GameScore2 += 1;
 					GameBoard2.instance.SetScore(Client.instance.Player.GameScore2);
 					Destroy(other.gameObject);
 					Client.instance.Game.ItemCount -= 1;
 				} else {
+					AudioController.Instance.SetAudio(AudioName.Audio_Die);
+					EffectManager.instance.PlayEffect(EffectType.Effect_Dead_Water, gameObject.transform.localPosition);
+					gameObject.SetActive(false);
 					GameBoard2.instance.GameOver();
 				}
 			}

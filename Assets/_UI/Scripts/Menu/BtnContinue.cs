@@ -7,6 +7,7 @@ namespace UI {
 	public class BtnContinue : MonoBehaviour, IPointerClickHandler {
 
 		public void OnPointerClick(PointerEventData eventData) {
+			AudioController.Instance.ResumeBkMusic();
 			switch (Client.instance.Game.CurrntLevel) {
 				case Level.Level_1:
 					GameBoard1.instance.Continue();

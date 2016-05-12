@@ -1,4 +1,5 @@
-﻿using client;
+﻿using System.Collections;
+using client;
 using Game;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,6 +32,11 @@ namespace UI {
 		/// 最高分
 		/// </summary>
 		private int maxScore;
+		/// <summary>
+		/// 是否延迟show操作
+		/// </summary>
+		private bool ShowLater = false;
+		private float Timer;
 
 		public int MaxScore {
 			get {
@@ -60,6 +66,7 @@ namespace UI {
 		}
 
 		void Start() {
+			Client.instance.Game.GameStatu = GameStatus.GamePlaying;
 			Time.timeScale = 1;
 			Client.instance.Game.CurrntLevel = Level.Level_1;
 			Client.instance.Player.GameScore1 = 0;
@@ -71,14 +78,18 @@ namespace UI {
 		}
 
 		void OnEnable() {
+			AudioController.Instance.SetBKMusic();
 			Start();
 		}
 
 		public void Continue() {
+			Client.instance.Game.GameStatu = GameStatus.GamePlaying;
 			Time.timeScale = 1;
 		}
 
 		public void Pause() {
+			Client.instance.Game.GameStatu = GameStatus.GameParse;
+			AudioController.Instance.PauseBKMusic();
 			Time.timeScale = 0;
 		}
 
@@ -98,11 +109,25 @@ namespace UI {
 			if (MainUIController.Instance.CurrentDialogType == DialogType.GameOver) {
 				return;
 			}
+			Client.instance.Game.GameStatu = GameStatus.GameOver;
+			AudioController.Instance.PauseBKMusic();
 			Time.timeScale = 0;
 			if (MaxScore < Client.instance.Player.GameScore1) {
 				MaxScore = Client.instance.Player.GameScore1;
 			}
-			MainUIController.Instance.Show(DialogType.GameOver);
+			ShowLater = true;
+			Timer = Time.realtimeSinceStartup;
 		}
+
+		void Update() {
+			if (ShowLater) {
+				if (Time.realtimeSinceStartup - Timer >= 0.5f) {
+					MainUIController.Instance.Show(DialogType.GameOver);
+					Timer = Time.realtimeSinceStartup;
+					ShowLater = false;
+				}
+			}
+		}
+
 	}
 }

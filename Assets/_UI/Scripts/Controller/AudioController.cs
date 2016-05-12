@@ -11,13 +11,29 @@ namespace UI {
 		/// </summary>
 		Music_Menu,
 		/// <summary>
-		/// 游戏背景音乐
-		/// </summary>
-		Music_Game,
-		/// <summary>
 		/// 普通按钮点击音效
 		/// </summary>
 		Audio_BtnClick,
+		/// <summary>
+		/// 吃到收集物的音效
+		/// </summary>
+		Audio_Eat,
+		/// <summary>
+		/// 碰到敌人的音效
+		/// </summary>
+		Audio_Die,
+		/// <summary>
+		/// 游戏场景音乐1
+		/// </summary>
+		Music_Game1,
+		/// <summary>
+		/// 游戏场景音乐2
+		/// </summary>
+		Music_Game2,
+		/// <summary>
+		/// 游戏场景音乐3
+		/// </summary>
+		Music_Game3,
 
 	}
 
@@ -43,39 +59,30 @@ namespace UI {
 		private MenuType lastMenu = MenuType.None;
 		private bool inited = false;
 
-		public bool IsAudioPause
-		{
-			get
-			{
+		public bool IsAudioPause {
+			get {
 				return isAudioPause;
 			}
-			set
-			{
+			set {
 				CommonUtil.SetBool(UIData.IS_EFFECTS_PAUSED, value);
-				if (isAudioPause != value && _OnChange != null)
-				{
+				if (isAudioPause != value && _OnChange != null) {
 					_OnChange(value);
 				}
 				isAudioPause = value;
 			}
 		}
 
-		public bool IsMusicPause
-		{
-			get
-			{
+		public bool IsMusicPause {
+			get {
 				return isMusicPause;
 			}
-			set
-			{
+			set {
 				CommonUtil.SetBool(UIData.IS_MUSIC_PAUSED, value);
-				if (isMusicPause != value && _OnChange != null)
-				{
+				if (isMusicPause != value && _OnChange != null) {
 					_OnChange(value);
 				}
 				isMusicPause = value;
-				if (!isMusicPause)
-				{
+				if (!isMusicPause) {
 					SetBKMusic();
 				} else {
 					musicBG.Stop();
@@ -83,26 +90,20 @@ namespace UI {
 			}
 		}
 
-		public event Action<bool> OnChange
-		{
-			add
-			{
+		public event Action<bool> OnChange {
+			add {
 				_OnChange += value;
 				value(!IsAudioPause);
 
 			}
-			remove
-			{
+			remove {
 				_OnChange -= value;
 			}
 		}
 
-		public static AudioController Instance
-		{
-			get
-			{
-				if (instance == null)
-				{
+		public static AudioController Instance {
+			get {
+				if (instance == null) {
 					instance = FindObjectOfType<AudioController>();
 				}
 				return instance;
@@ -114,8 +115,7 @@ namespace UI {
 		}
 
 		void Start() {
-			if (!inited)
-			{
+			if (!inited) {
 				Init();
 				inited = true;
 			}
@@ -127,58 +127,49 @@ namespace UI {
 		}
 
 		public void SetAudio(AudioName _name, AudioState _state = AudioState.Play) {
-			if (IsAudioPause)
-			{
+			if (IsAudioPause) {
 				return;
 			}
 			AudioClip ac = Resources.Load<AudioClip>(_name.ToString());
-			if (ac == null)
-			{
+			if (ac == null) {
 				Debug.LogError("update/audio/" + _name.ToString() + "不存在！");
 				return;
 			}
-			if (_state == AudioState.Play)
-			{
+			if (_state == AudioState.Play) {
 				audioEffect.PlayOneShot(ac);
 			}
 		}
 
 		public void SetMusic(AudioName _name, AudioState _state = AudioState.Play) {
-			if (!inited)
-			{
+			if (!inited) {
 				Init();
 			}
 
-			if (IsMusicPause)
-			{
+			if (IsMusicPause) {
 				return;
 			}
 
 
 			AudioClip ac = null;
-			if ((ac = UIPreLoadManager.instance.GetAudioClipByACName(_name.ToString())) == null)
-			{
+			if ((ac = UIPreLoadManager.instance.GetAudioClipByACName(_name.ToString())) == null) {
 				ac = Resources.Load<AudioClip>(_name.ToString());
 				UIPreLoadManager.instance.SaveMusic(_name.ToString(), ac);
 			}
-			if (ac == null)
-			{
+			if (ac == null) {
 				Debug.LogError("update/audio/" + _name.ToString() + "不存在！");
 				return;
 			}
 
 			bool isChange = false;
-			if (musicBG.clip != ac)
-			{
+			if (musicBG.clip != ac) {
 				musicBG.clip = ac;
 				isChange = true;
 			}
 			musicBG.loop = true;
-			switch (_state)
-			{
+			switch (_state) {
 				case AudioState.Play:
-					if (isChange || !musicBG.isPlaying)
-					{
+					if (isChange || !musicBG.isPlaying) {
+						musicBG.Stop();
 						musicBG.Play();
 					}
 					break;
@@ -194,30 +185,35 @@ namespace UI {
 		}
 
 		public void SetBKMusic(MenuType _menuType = MenuType.None) {
-			if (lastMenu != _menuType || _menuType == MenuType.None)
-			{
-				if (_menuType == MenuType.None)
-				{
+			if (lastMenu != _menuType || _menuType == MenuType.None) {
+				if (_menuType == MenuType.None) {
 					lastMenu = MainUIController.Instance.CurrentMenuType;
 				} else {
 					lastMenu = _menuType;
 				}
 
-				if (_menuType == MenuType.None)
-				{
+				if (_menuType == MenuType.None) {
 					_menuType = MainUIController.Instance.CurrentMenuType;
 				}
-				switch (_menuType)
-				{
+				switch (_menuType) {
 					case MenuType.Main:
-						SetMusic(AudioName.Music_Menu);
+						//SetMusic(AudioName.Music_Menu);
 						break;
 					case MenuType.Game1:
 						PauseBKMusic();
-						SetMusic(AudioName.Music_Game);
+						SetMusic(AudioName.Music_Game1);
+						break;
+					case MenuType.Game2:
+						PauseBKMusic();
+						SetMusic(AudioName.Music_Game2);
+						break;
+					case MenuType.Game3:
+						PauseBKMusic();
+						SetMusic(AudioName.Music_Game3);
 						break;
 					default:
-						SetMusic(AudioName.Music_Menu);
+						PauseBKMusic();
+						//SetMusic(AudioName.Music_Menu);
 						break;
 				}
 			}
@@ -228,19 +224,16 @@ namespace UI {
 		}
 
 		public void ResumeBkMusic() {
-			if (!IsMusicPause && !musicBG.isPlaying)
-			{
+			if (!IsMusicPause && !musicBG.isPlaying) {
 				musicBG.Play();
 			}
 		}
 
 		void OnApplicationPause(bool isPause) {
-			if (isPause)
-			{
+			if (isPause) {
 				musicBG.Pause();
 			} else {
-				if (!IsMusicPause && !musicBG.isPlaying)
-				{
+				if (!IsMusicPause && !musicBG.isPlaying) {
 					musicBG.Play();
 				}
 			}

@@ -1,4 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections;
+using System.Linq.Expressions;
+using System.Timers;
 using UnityEngine;
 using client;
 using Game;
@@ -37,7 +39,11 @@ namespace UI {
 		/// 最高分
 		/// </summary>
 		private int maxScore;
-
+		/// <summary>
+		/// 是否延迟show操作
+		/// </summary>
+		private bool ShowLater = false;
+		private float Timer;
 		public int MaxScore {
 			get { return maxScore; }
 			set {
@@ -66,15 +72,18 @@ namespace UI {
 		}
 
 		void Start() {
+			Client.instance.Game.GameStatu = GameStatus.GamePlaying;
 			Time.timeScale = 1;
 			Client.instance.Game.CurrntLevel = Level.Level_2;
 			Client.instance.Player.GameScore2 = 0;
 			Client.instance.Game.ItemCount = 0;
 
+			Water.gameObject.SetActive(true);
 			Water.transform.localPosition = WaterPos;
 			Water.transform.localRotation = new Quaternion(0, 0, 0, 0);
 			Water.transform.localScale = Vector3.one;
 
+			Fire.gameObject.SetActive(true);
 			Fire.transform.localPosition = FirePos;
 			Fire.transform.localRotation = new Quaternion(0, 0, 0, 0);
 			Fire.transform.localScale = Vector3.one;
@@ -85,14 +94,18 @@ namespace UI {
 		}
 
 		void OnEnable() {
+			AudioController.Instance.SetBKMusic();
 			Start();
 		}
 
 		public void Continue() {
+			Client.instance.Game.GameStatu = GameStatus.GamePlaying;
 			Time.timeScale = 1;
 		}
 
 		public void Pause() {
+			Client.instance.Game.GameStatu = GameStatus.GameParse;
+			AudioController.Instance.PauseBKMusic();
 			Time.timeScale = 0;
 		}
 
@@ -111,10 +124,23 @@ namespace UI {
 				return;
 			}
 			Time.timeScale = 0;
+			Client.instance.Game.GameStatu = GameStatus.GameOver;
+			AudioController.Instance.PauseBKMusic();
 			if (MaxScore < Client.instance.Player.GameScore2) {
 				MaxScore = Client.instance.Player.GameScore2;
 			}
-			MainUIController.Instance.Show(DialogType.GameOver);
+			ShowLater = true;
+			Timer = Time.realtimeSinceStartup;
+		}
+
+		void Update() {
+			if (ShowLater) {
+				if (Time.realtimeSinceStartup - Timer >= 0.5f) {
+					MainUIController.Instance.Show(DialogType.GameOver);
+					Timer = Time.realtimeSinceStartup;
+					ShowLater = false;
+				}
+			}
 		}
 	}
 }

@@ -24,6 +24,7 @@ namespace Game {
 		}
 
 		public void Start() {
+			gameObject.SetActive(true);
 			StartCoroutine(RestEffect());
 		}
 
@@ -34,7 +35,7 @@ namespace Game {
 			CanJump = false;
 			Sequence sequence = DOTween.Sequence();
 			if (PlayerType == PlayerType.PlayerWater) {
-				Tween1 = transform.DOLocalMoveX(-350, 0.2f);
+				Tween1 = transform.DOLocalMoveX(-400, 0.2f);
 				Tween2 = transform.DOLocalMoveX(-74, 0.4f).OnComplete(() => {
 					CanJump = true;
 				}
@@ -42,7 +43,7 @@ namespace Game {
 				sequence.Append(Tween1);
 				sequence.Append(Tween2);
 			} else {
-				Tween1 = transform.DOLocalMoveX(350, 0.2f);
+				Tween1 = transform.DOLocalMoveX(400, 0.2f);
 				Tween2 = transform.DOLocalMoveX(74, 0.4f).OnComplete(() => {
 					CanJump = true;
 				});
@@ -60,6 +61,13 @@ namespace Game {
 		}
 
 		void OnTriggerEnter2D(Collider2D other) {
+			AudioController.Instance.SetAudio(AudioName.Audio_Die);
+			if (other.gameObject.tag == "Water") {
+				EffectManager.instance.PlayEffect(EffectType.Effect_Dead_Fire, gameObject.transform.localPosition);
+			} else if (other.gameObject.tag == "Fire") {
+				EffectManager.instance.PlayEffect(EffectType.Effect_Dead_Water, gameObject.transform.localPosition);
+			}
+			gameObject.SetActive(false);
 			GameBoard3.instance.GameOver();
 		}
 

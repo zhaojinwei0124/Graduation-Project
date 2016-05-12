@@ -21,6 +21,9 @@ namespace UI {
 		}
 
 		public void OnPointerClick(PointerEventData eventData) {
+			if (Client.instance.Game.GameStatu == GameStatus.GameOver) {
+				return;
+			}
 			ChangePlayer();
 		}
 

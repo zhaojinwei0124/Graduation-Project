@@ -44,8 +44,8 @@ namespace Game {
 		/// </summary>
 		/// <returns></returns>
 		IEnumerator SpawnWater() {
-			TimeInterval = Random.Range(1f, 1.6f);
 			while (true) {
+				TimeInterval = Random.Range(1f, 2f);
 				yield return new WaitForSeconds(TimeInterval);
 				Water = Instantiate(Water);
 				SetItemPosition(Water, true);
@@ -57,8 +57,14 @@ namespace Game {
 		/// </summary>
 		/// <returns></returns>
 		IEnumerator SpawnFire() {
-			TimeInterval = Random.Range(1f, 1.6f);
+			TimeInterval = Random.Range(1f, 2f);
+			bool first = true;
+			if (first) {
+				yield return new WaitForSeconds(TimeInterval);
+				first = false;
+			}
 			while (true) {
+				TimeInterval = Random.Range(1f, 2f);
 				yield return new WaitForSeconds(TimeInterval);
 				Fire = Instantiate(Fire);
 				SetItemPosition(Fire, false);
@@ -75,7 +81,7 @@ namespace Game {
 			rt.SetParent(transform);
 			rt.localScale = Vector3.one;
 			if (isWater) {
-				rt.localPosition = Transforms[1].localPosition ;
+				rt.localPosition = Transforms[1].localPosition;
 			} else {
 				rt.localPosition = Transforms[0].localPosition;
 			}

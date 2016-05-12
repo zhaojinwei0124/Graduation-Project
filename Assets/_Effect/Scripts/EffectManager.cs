@@ -6,7 +6,8 @@ using System;
 namespace UI {
 
 	public enum EffectType {
-		Effect_Dead,
+		Effect_Dead_Fire,
+		Effect_Dead_Water,
 	}
 
 	public class EffectManager : MonoBehaviour {

@@ -8,6 +8,7 @@ namespace UI {
 	public class BtnRestart : MonoBehaviour, IPointerClickHandler {
 
 		public void OnPointerClick(PointerEventData eventData) {
+			AudioController.Instance.SetBKMusic();
 			switch (Client.instance.Game.CurrntLevel) {
 				case Level.Level_1:
 					GameBoard1.instance.Restart();

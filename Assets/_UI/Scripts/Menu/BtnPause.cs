@@ -6,6 +6,10 @@ using UnityEngine.EventSystems;
 public class BtnPause : MonoBehaviour, IPointerClickHandler {
 
 	public void OnPointerClick(PointerEventData eventData) {
+		if (Client.instance.Game.GameStatu == GameStatus.GameOver) {
+			return;
+		}
+		AudioController.Instance.PauseBKMusic();
 		switch (Client.instance.Game.CurrntLevel) {
 			case Level.Level_1:
 				GameBoard1.instance.Pause();
