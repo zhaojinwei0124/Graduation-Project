@@ -40,11 +40,15 @@ namespace Game {
 		/// </summary>
 		public GameObject EffectObject;
 
+		private Tweener Tweener;
 		void Awake() {
 			instance = this;
 		}
 
 		public void Start() {
+			if (Tweener != null) {
+				Tweener.Kill();
+			}
 			gameObject.SetActive(true);
 			StartCoroutine(RestEffect());
 			if (PlayerType == PlayerType.PlayerWater) {
@@ -97,7 +101,7 @@ namespace Game {
 			var rect = GetComponent<Image>().rectTransform;
 			var y = rect.localPosition.y;
 			var toPosition = new Vector2(PlayerRoadX[index], y);
-			rect.DOLocalMove(toPosition, 0.2f);
+			Tweener = rect.DOLocalMove(toPosition, 0.2f);
 		}
 
 		/// <summary>

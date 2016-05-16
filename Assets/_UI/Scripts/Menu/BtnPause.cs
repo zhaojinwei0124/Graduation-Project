@@ -10,6 +10,7 @@ public class BtnPause : MonoBehaviour, IPointerClickHandler {
 			return;
 		}
 		AudioController.Instance.PauseBKMusic();
+		MainUIController.Instance.Show(DialogType.GamePause);
 		switch (Client.instance.Game.CurrntLevel) {
 			case Level.Level_1:
 				GameBoard1.instance.Pause();

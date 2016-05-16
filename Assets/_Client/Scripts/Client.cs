@@ -30,6 +30,10 @@ namespace client {
 		/// 第二关最高分
 		/// </summary>
 		public const string GAME_3_MAXSCORE = "Game_3_MaxScore";
+		/// <summary>
+		/// 第一次游戏
+		/// </summary>
+		public const string FIRSTGAME = "firstGame";
 
 		void Awake() {
 			instance = this;

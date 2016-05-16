@@ -130,7 +130,11 @@ namespace UI {
 			if (IsAudioPause) {
 				return;
 			}
-			AudioClip ac = Resources.Load<AudioClip>(_name.ToString());
+			AudioClip ac = null;
+			if ((ac = UIPreLoadManager.instance.GetAudioClipByACName(_name.ToString())) == null) {
+				ac = Resources.Load<AudioClip>(_name.ToString());
+				UIPreLoadManager.instance.SaveMusic(_name.ToString(), ac);
+			}
 			if (ac == null) {
 				Debug.LogError("update/audio/" + _name.ToString() + "不存在！");
 				return;

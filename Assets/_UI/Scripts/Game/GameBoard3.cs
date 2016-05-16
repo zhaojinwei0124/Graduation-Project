@@ -57,7 +57,7 @@ namespace UI {
 		}
 
 		private void InitData() {
-			maxScore = CommonUtil.GetInt(Client.GAME_1_MAXSCORE, 0);
+			maxScore = CommonUtil.GetInt(Client.GAME_3_MAXSCORE, 0);
 		}
 
 		/// <summary>

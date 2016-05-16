@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Policy;
 using UnityEngine;
 
 namespace client {
@@ -52,5 +53,31 @@ namespace client {
 		/// 当前游戏状态
 		/// </summary>
 		public GameStatus GameStatu;
+
+		/// <summary>
+		/// 是否是第一次游戏
+		/// </summary>
+		private bool firstGame;
+
+		/// <summary>
+		/// 是否是第一次游戏
+		/// </summary>
+		public bool FirstGame {
+			get {
+				return firstGame;
+			}
+			set {
+				firstGame = value;
+				CommonUtil.SetBool(Client.FIRSTGAME, value);
+			}
+		}
+
+		void Awake() {
+			Init();
+		}
+
+		private void Init() {
+			firstGame = CommonUtil.GetBool(Client.FIRSTGAME, true);
+		}
 	}
 }

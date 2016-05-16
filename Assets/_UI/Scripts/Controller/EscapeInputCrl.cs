@@ -1,4 +1,5 @@
 ﻿
+using client;
 using UnityEngine;
 
 namespace UI {
@@ -13,6 +14,10 @@ namespace UI {
 		}
 
 		private void OnEscapeKeyDown() {
+			if (Client.instance.Game.FirstGame) {
+				return;
+			}
+
 			if (MainUIController.Instance.CurrentDialogType == DialogType.GamePause || MainUIController.Instance.CurrentDialogType == DialogType.GameOver) {
 				return;
 			}
